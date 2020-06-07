@@ -2,13 +2,14 @@
 
 ## Qu'est-ce que le CRUD?
 
-Le CRUD est un framework. Lorsque l'on crée un site on veut pouvoir avoir une gestion des contenus, les afficher, les modifier et les supprimer: c'est ce que l'on appelle le CRUD.
+Le CRUD est un framework. Lorsque nous créons un site web, nous voulons pouvoir avoir une gestion des contenus, les afficher, les modifier et les supprimer: c'est ce que l'on appelle le CRUD.
 
 ## Ruby on Rails
 
-Ruby on rails à une convention sur la méthodologie à adopter pour les URL et les méthodes http.
+Ruby on rails a une convention sur la méthodologie à adopter pour les URL et les méthodes HTTP.
 
-Lorsque l'on va créer un CRUD on va donner un nom à notre **'resources'**
+Pour la création d'un CRUD, nous donnons un nom à notre **'resources'**
+
   ```Exemple avec: resources :articles```
 
 |HTTP Verb| Path |Controller#Action| Utilisé pour|
@@ -26,7 +27,7 @@ Lorsque l'on va créer un CRUD on va donner un nom à notre **'resources'**
 
 La première étape va être de créer les différentes URL qui correspondent à ce CRUD.
 
-Il existe un raccourcis sur Ruby on rails, dans  ```router.rb``` vous pouvez utiliser la méthode ```resources```, suivi du ```nom de la resource```. 
+Il existe un raccourcis sur Ruby on Rails, dans le fichier  ```router.rb``` vous pouvez utiliser la méthode ```resources```, suivi du ```nom de la resource```. 
 ```Exemple: resources :articles```. Cela a pour effet de créer tout un système de CRUD automatiquement.
 
 Pour lister les routes qui se sont créées, il suffit de taper dans le terminal la commande: ```$rails routes```.
@@ -34,9 +35,10 @@ Pour lister les routes qui se sont créées, il suffit de taper dans le terminal
 ![enter image description here](https://zupimages.net/up/20/23/7os1.png)
 
 Pour tester la route de la page index de nos articles, il suffit de rentrer dans le navigateur l'adresse suivante: ```localhost:3000/articles```.
-La partie /articles nous envoie sur le controller Articles et sur l'action index de celui-ci.
 
-Exemple d'action index qui récupère tous les articles.
+La partie ```/articles``` nous envoie sur le ```controller Articles``` et sur l'action ```index``` de celui-ci.
+
+Exemple d'action ```index``` qui récupère tous les articles.
 ![enter image description here](https://zupimages.net/up/20/23/m83v.png)
 
 ### Visualiser un article
@@ -50,7 +52,7 @@ Pour l'instant cela nous indique que la page n'existe pas. Il faut en effet alle
 
 ![enter image description here](https://zupimages.net/up/20/23/le3a.png)
 
-Puis créer la page html de la vue show avec un fichier ```show.html.erb```.
+Puis créer la page HTML de la vue show avec un fichier ```show.html.erb```.
 
 Exemple:
 ![enter image description here](https://zupimages.net/up/20/23/v1ub.png)
@@ -60,8 +62,8 @@ Maintenant si on veut éditer un article, il faut créer l'action ```edit``` dan
 
 ![enter image description here](https://zupimages.net/up/20/23/2k0q.png)
 
-Puis créer la page html de la vue edit avec un fichier ```edit.html.erb``` où on y ajoutera un formulaire. Pour cela, nous allons nous aider du FormHelper de Rails. 
-Pour générer un formulaire qui correspond à un model en particulier, il y a une méthode qui s'appelle form_for. Cette méthode prend en paramètre l'enregistrement que vous souhaitez modifier (ici @article) et un block qui aura comme paramètre un FormBuilder, qui est un objet qui va nous permettre de générer les différents champs.
+Puis créer la page HTML de la vue edit avec un fichier ```edit.html.erb``` où on y ajoutera un formulaire. Pour cela, nous allons nous aider du **FormHelper** de Rails. 
+Pour générer un formulaire qui correspond à un model en particulier, il y a une méthode qui s'appelle form_for. Cette méthode prend en paramètre l'enregistrement que vous souhaitez modifier (ici @article) et un block qui aura comme paramètre un **FormBuilder**, qui est un objet qui va nous permettre de générer les différents champs.
 
 Exemple:
 ![enter image description here](https://zupimages.net/up/20/23/uav9.png)
@@ -71,11 +73,10 @@ Il faut donc aller créer cette méthode au niveau du ```controller Articles```.
 
 ![enter image description here](https://zupimages.net/up/20/23/84cn.png)
 
-Pour pouvoir modifier un article à partir de la page index, nous pouvons rajouter un bouton qui nous emmènera vers le formulaire d'édition. Ce bouton aura comme chemin:
+Pour pouvoir modifier un article à partir de la page index, nous pouvons rajouter un bouton qui nous emmènera vers le formulaire d'édition. Ce bouton aura comme attribut ```href``` le chemin correspondant à la route d'édition d'un article:
 
     <a href="<%= edit_article_path(article.id)%>" class="btn">Editer l'article</a>
 
-Chemin que l'on retrouve au niveau de la liste des routes pour l'édition d'un article.
 
 ### Créer un article
 Si on veut pouvoir créer un nouvel article, il faut aller créer l'action dans le ```controller Articles```:
@@ -90,13 +91,13 @@ Avec comme chemin, la route vers la création d'un article.
 
 Et enfin, on termine avec la création de  la vue qui lui correspond: ```new.html.erb``` en récupérant le formulaire de l'édition.
 
-Lorsque l'on soumet le formulaire de création, il nous renvoie de nouveau une erreur car il ne trouve pas l'action ```create``` que l'on va tout de suite aller créer dans le ```controller Articles```.
+Lorsque l'on soumet le formulaire de création, il nous renvoie de nouveau une erreur car il ne trouve pas l'action ```create``` que l'on va tout de suite créer dans le ```controller Articles```.
 
 ![enter image description here](https://zupimages.net/up/20/23/i5u5.png)
 On peut voir qu'on se répète entre la ```def update``` et de la ```def create``` avec le  ``` post_params = params.require(:article).permit(:title, :content)```.
 Le mieux est de créer une méthode qui permet de faire l'opération ci-dessus.
 
-On va donc créer une méthode privée, ce qui donnera ceux-ci:
+On va donc créer une méthode privée, ce qui donnera ceci:
 
 ![enter image description here](https://zupimages.net/up/20/23/zttn.png)
 
@@ -106,7 +107,7 @@ Pour finir, nous allons créer la méthode pour supprimer un article. Pour cela 
 
 Il existe un raccourcis qui permet de créer des liens qui vont avoir une méthode.
 
-Grâce aux librairies injectées par Rails, notamment le javascript ``` jquery_ujs```, qui nous permet de rajouter des fonctionnalités à l'html à travers l'attribut ```data```. Par exemple,  ```data-confirm="êtes-vous sur?"```, nous affiche un message d'alerte.
+Grâce aux librairies injectées par Rails, notamment le javascript ``` jquery_ujs```, qui nous permet de rajouter des fonctionnalités à l'HTML à travers l'attribut ```data```. Par exemple,  ```data-confirm="êtes-vous sur?"```, nous affiche un message d'alerte.
 Dans notre cas, nous voulons que notre lien soit posté avec une méthode particulière ```DELETE```, nous pouvons donc utiliser l'attribut: ```data-method="DELETE"```.
 
 Au niveau du ```controller Articles```, il faut créer la méthode ```destroy```:
@@ -119,37 +120,53 @@ Après toutes ces étapes, nous avons mis en place un CRUD tout simplement.
 Nous allons revoir les étapes avec une nouvelle migration.
 
  1. Création d'une table:
+ 
  ```$rails g migration CreateCategories name:string slug:string```
  2. Faire la migration:
+ 
  ```$rails db:migrate```
  3. Création d'un model:
- ```$rails g model Category --skip```  permet de sauter la migration qui est faite juste avant.
+ 
+ ```$rails g model Category --skip```  (```--skip``` permet de sauter la migration qui est faite juste avant).
  4. Création du controller et de ses méthodes:
+ 
  ```$rails g controller Categories index show new create edit update destroy```
  5. Ajouter les routes dans le fichier routes.rb:
+ 
 ```resources :categories```
  6. Remplir toutes les méthodes dans le controller Categories:
 ![enter image description here](https://zupimages.net/up/20/23/9f52.png)
- 7. Création des page html dans le dossier ```app/views/categories```:
+
+ 7. Création des pages HTML dans le dossier ```app/views/categories```:
+ 
   ``` index.html.erb```
+  
   ```show.html.erb```
+  
   ```new.html.erb ``` qui est un formulaire.
+  
   ```edit.html.erb``` qui est un formulaire.
 
  8. Création des boutons qui renvoient vers les différentes pages ou actions:
   
     ```<a href="<%= new_category_path %>" class="btn">Créer une catégorie</a>```
+    
   ```<a href="<%= category_path(category.id) %>" class="btn">Voir la catégorie</a>```
+  
   ```<a href="<%= edit_category_path(category.id) %>" class="btn">Modifier la catégorie</a>```
+  
  ``` <a href="<%= category_path(category.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Sipprimer la catégorie</a>```
 
 
-Comme nous pouvons le constater, la mise en place d'un CRUD est plutôt générique.
 
 ## Conlusion
+
+Comme nous pouvons le constater, la mise en place d'un CRUD est plutôt générique.
+
 Il existe donc une commande qui nous génère tout cela automatiquement: ```scaffold```
 
 Exemple avec la création d'un User:
+
   ```$rails g scaffold User username:string bio:text```
 
 Cela va créer:
@@ -158,9 +175,10 @@ Cela va créer:
 - le controller
 - les différentes vues qui correspondent
 
-Faire:
+Puis faire:
   ```$rails db:migrate```
 
 Nous avons maintenant accès à une nouvelle URL: ```localhost:3000/users```
 qui nous permet de gérer les utilisateurs. Toutes les fonctionnalités sont présentes. Il suffit juste de rajouter un peu de style à nos pages.
 
+## Mission THP Delmas/Dupuy
