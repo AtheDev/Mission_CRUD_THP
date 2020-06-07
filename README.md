@@ -1,8 +1,8 @@
 # Retranscription Grafitkar-CRUD
 
-## Qu'es-ce que le CRUD?
+## Qu'est-ce que le CRUD?
 
-Le CRUD est un freamwork. Lorsque l'on crée un site on veut pouvoir avoir une gestion des contenus, les afficher, les modifier et les supprimer: c'est ce que l'on appelle le CRUD.
+Le CRUD est un framework. Lorsque l'on crée un site on veut pouvoir avoir une gestion des contenus, les afficher, les modifier et les supprimer: c'est ce que l'on appelle le CRUD.
 
 ## Ruby on Rails
 
