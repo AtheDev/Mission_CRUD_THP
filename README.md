@@ -122,19 +122,25 @@ Nous allons revoir les étapes avec une nouvelle migration.
  1. Création d'une table:
  
  ```$rails g migration CreateCategories name:string slug:string```
+ 
  2. Faire la migration:
  
  ```$rails db:migrate```
+ 
  3. Création d'un model:
  
  ```$rails g model Category --skip```  (```--skip``` permet de sauter la migration qui est faite juste avant).
+ 
  4. Création du controller et de ses méthodes:
  
  ```$rails g controller Categories index show new create edit update destroy```
+ 
  5. Ajouter les routes dans le fichier routes.rb:
  
 ```resources :categories```
+
  6. Remplir toutes les méthodes dans le controller Categories:
+ 
 ![enter image description here](https://zupimages.net/up/20/23/9f52.png)
 
  7. Création des pages HTML dans le dossier ```app/views/categories```:
@@ -149,13 +155,13 @@ Nous allons revoir les étapes avec une nouvelle migration.
 
  8. Création des boutons qui renvoient vers les différentes pages ou actions:
   
-    ```<a href="<%= new_category_path %>" class="btn">Créer une catégorie</a>```
+```<a href="<%= new_category_path %>" class="btn">Créer une catégorie</a>```
     
-  ```<a href="<%= category_path(category.id) %>" class="btn">Voir la catégorie</a>```
+```<a href="<%= category_path(category.id) %>" class="btn">Voir la catégorie</a>```
   
-  ```<a href="<%= edit_category_path(category.id) %>" class="btn">Modifier la catégorie</a>```
+```<a href="<%= edit_category_path(category.id) %>" class="btn">Modifier la catégorie</a>```
   
- ``` <a href="<%= category_path(category.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Sipprimer la catégorie</a>```
+``` <a href="<%= category_path(category.id) %>" class="btn" data-confirm="êtes-vous sur?" data-method="DELETE">Supprimer la catégorie</a>```
 
 
 
